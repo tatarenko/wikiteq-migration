@@ -1,0 +1,20 @@
+services:
+  rclone-images:
+    image: "rclone/rclone"
+    restart: no
+    command: "-v --s3-versions --transfers=10 --config=/rclone.conf --s3-acl public-read sync /images ovhcloud:BUCKET_NAME"
+    volumes:
+      - images:/images
+      - ./_resources/rclone.conf:/rclone.conf
+  rclone-migration:
+    image: "rclone/rclone"
+    restart: no
+    command: "-v --transfers=10 --config=/rclone.conf sync /data ovhcloud:BUCKET_NAME"
+    volumes:
+      - ./_migration_data:/data
+      - ./_resources/rclone.conf:/rclone.conf
+
+volumes:
+  images:
+    external: true
+    name: VOLUMENAME_images
