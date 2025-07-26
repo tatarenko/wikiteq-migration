@@ -31,7 +31,7 @@ result_filename=`basename "$result_path"`
 result_dirname=`dirname "$result_path"`
 
 if [ -d "$result_dirname" ]; then
-    mkdir -p "${result_dirname}" || { echo "can't create non-existent dir ${result_dirname}! aborting..." ; exit 1 }
+    mkdir -p "${result_dirname}" || { echo "can't create non-existent dir ${result_dirname}! aborting..."; exit 1; }
 fi
 
 if [ -f "${result_dirname}/${result_filename}.2" ]; then
