@@ -1,0 +1,4 @@
+0 1 * * * bash /home/wikiteq/docker/migration/cron-create-mysql-dump.sh --docker-path /home/wikiteq/docker/wikizilla.org --result-path /home/wikiteq/docker/migration/_migration_data/prod.mysqldump.sql.gz
+0 2 * * * bash /home/wikiteq/docker/migration/cron-create-mysql-dump.sh --docker-path /home/wikiteq/docker/staging_1.43 --result-path /home/wikiteq/docker/migration/_migration_data/dev.mysqldump.sql.gz
+0 3 * * * docker-compose --project-directory="/home/wikiteq/docker/migration" up -d rclone-migration
+0 4 * * * docker-compose --project-directory="/home/wikiteq/docker/migration" up -d rclone-images
