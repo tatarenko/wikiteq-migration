@@ -40,4 +40,5 @@ if [ -f "${result_dirname}/${result_filename}" ]; then
     find ${result_dirname} -name "${result_filename}.*" | tail -n +4 | xargs -I %% rm %%
 fi
 
-docker-compose --project-directory="${docker_path}" exec -T db /bin/bash -c 'mysqldump --all-databases --triggers --routines --events --single-transaction --skip-lock-tables --column-statistics -uroot -p"$MYSQL_ROOT_PASSWORD"' | gzip  > "${result_path}"
+#docker-compose --project-directory="${docker_path}" exec -T db /bin/bash -c 'mysqldump --all-databases --triggers --routines --events --single-transaction --skip-lock-tables --column-statistics -uroot -p"$MYSQL_ROOT_PASSWORD"' | gzip  > "${result_path}"
+docker compose --project-directory="${docker_path}" -f "${docker_path}/compose.yml" exec -T db /bin/bash -c 'mysqldump --all-databases --triggers --routines --events --single-transaction --skip-lock-tables --column-statistics -uroot -p"$(<$MYSQL_ROOT_PASSWORD_FILE)"' | gzip  > "${result_path}"
